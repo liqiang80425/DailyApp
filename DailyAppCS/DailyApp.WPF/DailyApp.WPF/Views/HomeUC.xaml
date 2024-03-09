@@ -1,0 +1,138 @@
+﻿<UserControl x:Class="DailyApp.WPF.Views.HomeUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DailyApp.WPF.Views"
+             mc:Ignorable="d" 
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--第一行-->
+        <TextBlock Text="{Binding LoginInfo}" FontSize="22" Margin="15,10"></TextBlock>
+
+        <!--第二行-->
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding StatPanelList}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="4"></UniformGrid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="{Binding BackColor}" CornerRadius="5" Margin="10" Cursor="{Binding Hand}">
+                        <Border.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding DataContext.NavigateCmm, RelativeSource={ RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}" CommandParameter="{Binding}"></MouseBinding>
+                        </Border.InputBindings>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect Color="#dddddd" ShadowDepth="1" BlurRadius="10"></DropShadowEffect>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Grid>
+                            <StackPanel Margin="20,10">
+                                <md:PackIcon  Kind="{Binding Icon}" Height="30" Width="30"></md:PackIcon>
+                                <TextBlock Text="{Binding ItemName}" Margin="0,15" FontSize="15"></TextBlock>
+                                <TextBlock Text="{Binding Result}"  FontSize="40" FontWeight="Bold"></TextBlock>
+                            </StackPanel>
+                            
+                            <!--画背景-->
+                            <Canvas  ClipToBounds="True">
+                                <Border Canvas.Top="10" Canvas.Right="-50" Width="120"  Height="120" Background="#ffffff" CornerRadius="100" Opacity="0.1"></Border>
+                                <Border Canvas.Top="80" Canvas.Right="-30" Width="120"  Height="120" Background="#ffffff" CornerRadius="100" Opacity="0.1"></Border>
+                            </Canvas>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!--第三行-->
+        <Grid Grid.Row="2" Margin="0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <!--第一列-->
+            <Border CornerRadius="5" Margin="10,0" Opacity="0.1" Background="#bebebebe"></Border>
+            <DockPanel Margin="10,0">
+                <DockPanel Margin="10,5" LastChildFill="False" DockPanel.Dock="Top">
+                    <TextBlock Text="待办事项" FontSize="20" FontWeight="Bold"></TextBlock>
+                    <Button Width="30" Height="30" DockPanel.Dock="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Command="{Binding ShowAddWaitDialogCmm}">
+                        <md:PackIcon Kind="Add"></md:PackIcon>
+                    </Button>
+                </DockPanel>
+
+                <!--数据列表-->
+                <ListBox ItemsSource="{Binding WaitList}" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding ShowEditWaitDialogCmm}" CommandParameter="{Binding SelectedItem,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}" ></i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel MaxHeight="80" LastChildFill="False">
+                                <ToggleButton DockPanel.Dock="Right" IsChecked="{Binding Status}" Command="{Binding DataContext.ChangeWaitStatusCmm,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}" CommandParameter="{Binding}"></ToggleButton>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="16"></TextBlock>
+                                    <TextBlock Text="{Binding Content}" Opacity="0.5" Margin="0,5"></TextBlock>
+                                </StackPanel>
+                               
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+
+            <!--第二列-->
+            <Border Grid.Column="1" CornerRadius="5" Margin="10,0" Opacity="0.1" Background="#bebebebe"></Border>
+            <DockPanel Margin="10,0" Grid.Column="1">
+                <DockPanel Margin="10,5" LastChildFill="False" DockPanel.Dock="Top">
+                    <TextBlock Text="备忘录" FontSize="20" FontWeight="Bold"></TextBlock>
+                    <Button Width="30" Height="30" DockPanel.Dock="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Command="{Binding ShowAddMemoDialogCmm}">
+                        <md:PackIcon Kind="Add"></md:PackIcon>
+                    </Button>
+                </DockPanel>
+
+                <!--数据列表-->
+                <ListBox ItemsSource="{Binding MemoList}" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding ShowEditMemoDialogCmm}" CommandParameter="{Binding SelectedItem,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}" ></i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel MaxHeight="80" LastChildFill="False">
+                               
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="16"></TextBlock>
+                                    <TextBlock Text="{Binding Content}" Opacity="0.5" Margin="0,5"></TextBlock>
+                                </StackPanel>
+
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </Grid>
+    </Grid>
+</UserControl>

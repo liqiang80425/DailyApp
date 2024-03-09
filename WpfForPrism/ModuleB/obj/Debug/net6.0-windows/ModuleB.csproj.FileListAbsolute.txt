@@ -1,0 +1,17 @@
+E:\自行课程资源\DailyApp\WpfForPrism\ModuleB\obj\Debug\net6.0-windows\ModuleB.csproj.AssemblyReference.cache
+E:\自行课程资源\DailyApp\WpfForPrism\ModuleB\bin\Debug\net6.0-windows\ModuleB.deps.json
+E:\自行课程资源\DailyApp\WpfForPrism\ModuleB\bin\Debug\net6.0-windows\ModuleB.dll
+E:\自行课程资源\DailyApp\WpfForPrism\ModuleB\bin\Debug\net6.0-windows\ModuleB.pdb
+E:\自行课程资源\DailyApp\WpfForPrism\ModuleB\obj\Debug\net6.0-windows\ModuleB.GeneratedMSBuildEditorConfig.editorconfig
+E:\自行课程资源\DailyApp\WpfForPrism\ModuleB\obj\Debug\net6.0-windows\ModuleB.AssemblyInfoInputs.cache
+E:\自行课程资源\DailyApp\WpfForPrism\ModuleB\obj\Debug\net6.0-windows\ModuleB.AssemblyInfo.cs
+E:\自行课程资源\DailyApp\WpfForPrism\ModuleB\obj\Debug\net6.0-windows\ModuleB.csproj.CoreCompileInputs.cache
+E:\自行课程资源\DailyApp\WpfForPrism\ModuleB\obj\Debug\net6.0-windows\ModuleB.dll
+E:\自行课程资源\DailyApp\WpfForPrism\ModuleB\obj\Debug\net6.0-windows\refint\ModuleB.dll
+E:\自行课程资源\DailyApp\WpfForPrism\ModuleB\obj\Debug\net6.0-windows\ModuleB.pdb
+E:\自行课程资源\DailyApp\WpfForPrism\ModuleB\obj\Debug\net6.0-windows\ref\ModuleB.dll
+E:\自行课程资源\DailyApp\WpfForPrism\ModuleB\obj\Debug\net6.0-windows\Views\ViewB.g.cs
+E:\自行课程资源\DailyApp\WpfForPrism\ModuleB\obj\Debug\net6.0-windows\ModuleB_MarkupCompile.cache
+E:\自行课程资源\DailyApp\WpfForPrism\ModuleB\obj\Debug\net6.0-windows\ModuleB_MarkupCompile.lref
+E:\自行课程资源\DailyApp\WpfForPrism\ModuleB\obj\Debug\net6.0-windows\Views\ViewB.baml
+E:\自行课程资源\DailyApp\WpfForPrism\ModuleB\obj\Debug\net6.0-windows\ModuleB.g.resources

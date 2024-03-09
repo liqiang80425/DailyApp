@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Study.API</name>
+    </assembly>
+    <members>
+        <member name="T:Study.API.Controllers.StudyController">
+            <summary>
+            学习的API接口
+            </summary>
+        </member>
+        <member name="M:Study.API.Controllers.StudyController.Fun1(System.String)">
+            <summary>
+            功能一
+            </summary>
+            <param name="name">姓名</param>
+            <returns>返回的姓名</returns>
+        </member>
+        <member name="M:Study.API.Controllers.StudyController.Fun2(System.String,System.String)">
+            <summary>
+            功能二
+            </summary>
+            <returns>字符串</returns>
+        </member>
+        <member name="T:Study.API.DataModel.AccountInfo">
+            <summary>
+            账号信息
+            </summary>
+        </member>
+        <member name="P:Study.API.DataModel.AccountInfo.Account">
+            <summary>
+            登录账号
+            </summary>
+        </member>
+        <member name="P:Study.API.DataModel.AccountInfo.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:Study.API.DataModel.AccountInfo.Pwd">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="M:Study.API.DataModel.StudyDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Study.API.DataModel.StudyDbContext})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="P:Study.API.DTO.AccountDTO.AccountId">
+            <summary>
+            账号ID
+            </summary>
+        </member>
+        <member name="P:Study.API.DTO.AccountDTO.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:Study.API.DTO.AccountDTO.Account">
+            <summary>
+            登录账号
+            </summary>
+        </member>
+        <member name="P:Study.API.DTO.AccountDTO.Pwd">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:Study.API.Reponses.ApiResponse`1.ErrorCode">
+            <summary>
+            错误码
+            </summary>
+        </member>
+        <member name="P:Study.API.Reponses.ApiResponse`1.Message">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="P:Study.API.Reponses.ApiResponse`1.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,112 @@
+﻿<Window x:Class="DailyApp.WPF.Views.MainWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DailyApp.WPF.Views"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        FontFamily="微软雅黑"
+        Title="MainWin" Height="700" Width="1200">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="-1"></WindowChrome>
+    </WindowChrome.WindowChrome>
+    <materialDesign:DialogHost DialogTheme="Inherit"  Identifier="RootDialog">
+
+        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}" x:Name="drawerHost">
+            <!--菜单-->
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel MinWidth="220">
+                    <StackPanel Margin="0,20" DockPanel.Dock="Top">
+                        <Image Source="/Images/user.jpg" Height="50" Width="50" >
+                            <!--裁剪-->
+                            <Image.Clip>
+                                <EllipseGeometry Center="24,24" RadiusX="24" RadiusY="24"></EllipseGeometry>
+                            </Image.Clip>
+                        </Image>
+                    </StackPanel>
+                    <!--菜单列表-->
+                    <ListBox ItemsSource="{Binding LeftMenuList}" ItemContainerStyle="{StaticResource LeftMenuStyle}" SelectionChanged="lbMenu_SelectionChanged">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding NavigateCmm}" CommandParameter="{Binding SelectedItem ,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"></i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Background="Transparent">
+                                    <materialDesign:PackIcon Margin="15,0" Kind="{Binding Icon}"></materialDesign:PackIcon>
+                                    <TextBlock Text="{Binding MenuName}"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+
+            <!--头部-->
+            <DockPanel>
+                <materialDesign:ColorZone Padding="16"
+                                  materialDesign:ElevationAssist.Elevation="Dp4"
+                                          MouseDoubleClick="ColorZone_MouseDoubleClick"
+                                  DockPanel.Dock="Top"
+                                  Mode="PrimaryMid">
+                    <DockPanel LastChildFill="True">
+                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                            <Image Source="/Images/user.jpg" Height="25" Width="25" >
+                                <!--裁剪-->
+                                <Image.Clip>
+                                    <EllipseGeometry Center="12,12" RadiusX="12" RadiusY="12"></EllipseGeometry>
+                                </Image.Clip>
+                            </Image>
+
+                            <Button x:Name="btnMin" Content="—" Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="btnMin_Click" />
+                            <Button x:Name="btnMax" Content="☐" Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="btnMax_Click"  />
+                            <Button x:Name="btnClose" Content="✕" Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="btnClose_Click" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <ToggleButton x:Name="MenuToggleButton"
+                            AutomationProperties.Name="HamburgerToggleButton"
+                            IsChecked="False"
+                            Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+
+                            <Button Margin="24,0,0,0"
+                      materialDesign:RippleAssist.Feedback="{Binding RelativeSource={RelativeSource Self}, Path=Foreground, Converter={StaticResource BrushRoundConverter}}"
+                      Command="{Binding GoBackCmm}"
+                      Content="{materialDesign:PackIcon Kind=ArrowLeft,
+                                                        Size=24}"
+                      Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"
+                      Style="{StaticResource MaterialDesignToolButton}"
+                      ToolTip="Previous Item" />
+
+                            <Button Margin="16,0,0,0"
+                      materialDesign:RippleAssist.Feedback="{Binding RelativeSource={RelativeSource Self}, Path=Foreground, Converter={StaticResource BrushRoundConverter}}"
+                      Command="{Binding GoForwardCmm}"
+                      Content="{materialDesign:PackIcon Kind=ArrowRight,
+                                                        Size=24}"
+                      Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"
+                      Style="{StaticResource MaterialDesignToolButton}"
+                      ToolTip="Next Item" />
+                            <TextBlock Margin="15,0"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       AutomationProperties.Name="Mat15.0erial Design In XAML Toolkit"
+                       FontSize="22"
+                       Text="我的日常" />
+                        </StackPanel>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+
+                <!--区域-->
+                <ContentControl prism:RegionManager.RegionName="MainViewRegion"></ContentControl>
+            </DockPanel>
+        </materialDesign:DrawerHost>
+    </materialDesign:DialogHost>
+</Window>

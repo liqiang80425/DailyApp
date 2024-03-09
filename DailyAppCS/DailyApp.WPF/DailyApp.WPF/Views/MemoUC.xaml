@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="DailyApp.WPF.Views.MemoUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DailyApp.WPF.Views"
+             mc:Ignorable="d" 
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <md:DialogHost>
+        <md:DrawerHost IsRightDrawerOpen="{Binding IsShowAddMemo}">
+            <md:DrawerHost.RightDrawerContent>
+                <DockPanel Width="300" LastChildFill="False">
+                    <TextBlock Text="添加备忘录" FontWeight="Bold" FontSize="20" Margin="20,10" DockPanel.Dock="Top"></TextBlock>
+
+                    <TextBox md:HintAssist.Hint="请输入备忘录标题" Margin="20,0" DockPanel.Dock="Top"  Text="{Binding MemoInfoDTO.Title}"></TextBox>
+                    <TextBox md:HintAssist.Hint="请输入备忘录内容" Margin="20,0" DockPanel.Dock="Top" MinHeight="100" Text="{Binding MemoInfoDTO.Content}"></TextBox>
+
+                    <Button Content="添加到备忘录" DockPanel.Dock="Top" Margin="20,0" Command="{Binding AddMemoCmm}" ></Button>
+                </DockPanel>
+            </md:DrawerHost.RightDrawerContent>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <!--第一行-->
+                <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
+                    <TextBox VerticalAlignment="Center" md:HintAssist.Hint="查找备忘录事项..." md:TextFieldAssist.HasClearButton="True" Text="{Binding SearchTitle,UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding QueryMemoListCmm}"></KeyBinding>
+                        </TextBox.InputBindings>
+                    </TextBox>
+                </StackPanel>
+
+                <Button Content="添加备忘录" HorizontalAlignment="Right" Margin="10,5" Command="{Binding ShowAddMemoCmm}"></Button>
+
+                <!--第二行-->
+                <StackPanel Grid.Row="1" VerticalAlignment="Center" Visibility="{Binding Visibility}">
+                    <Image Source="/Images/wind.png" Width="120" Height="120"/>
+                    <TextBlock  Margin="0,10" FontSize="18"
+                        HorizontalAlignment="Center"
+                        Text="没有找到备忘录，您可以添加一些备忘录。"/>
+                </StackPanel>
+                
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+                    <ItemsControl  HorizontalAlignment="Center" ItemsSource="{Binding MemoList}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel></WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <md:TransitioningContent OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
+                                      <Grid Width="220" Height="180" MaxWidth="250" Margin="8">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <md:PopupBox HorizontalAlignment="Right" Panel.ZIndex="1">
+                                            <Button Content="删除" Command="{Binding DataContext.DelCmm,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ItemsControl}}" CommandParameter="{Binding}"></Button>
+                                    </md:PopupBox>
+                                    <Border Background="#1E90FF" Grid.RowSpan="2" CornerRadius="2"></Border>
+                                    <TextBlock Text="{Binding Title}" Margin="10,5" FontWeight="Bold"></TextBlock>
+                                    <TextBlock Text="{Binding Content}" Grid.Row="1" Margin="10,5"></TextBlock>
+
+                                    <!--画背景-->
+                                    <Canvas  ClipToBounds="True" Grid.RowSpan="2">
+                                        <Border Canvas.Top="10" Canvas.Right="-50" Width="120"  Height="120" Background="#ffffff" CornerRadius="100" Opacity="0.1"></Border>
+                                        <Border Canvas.Top="80" Canvas.Right="-30" Width="120"  Height="120" Background="#ffffff" CornerRadius="100" Opacity="0.1"></Border>
+                                    </Canvas>
+                                </Grid>
+                                </md:TransitioningContent>
+                              
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+            </Grid>
+        </md:DrawerHost>
+    </md:DialogHost>
+</UserControl>

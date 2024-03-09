@@ -1,0 +1,14 @@
+D:\ClientPub\DailyApp.WPF.exe
+D:\ClientPub\DailyApp.WPF.dll
+D:\ClientPub\DailyApp.WPF.deps.json
+D:\ClientPub\DailyApp.WPF.runtimeconfig.json
+D:\ClientPub\DailyApp.WPF.pdb
+D:\ClientPub\DryIoc.dll
+D:\ClientPub\MaterialDesignColors.dll
+D:\ClientPub\MaterialDesignThemes.Wpf.dll
+D:\ClientPub\Microsoft.Xaml.Behaviors.dll
+D:\ClientPub\Newtonsoft.Json.dll
+D:\ClientPub\Prism.dll
+D:\ClientPub\Prism.DryIoc.Wpf.dll
+D:\ClientPub\Prism.Wpf.dll
+D:\ClientPub\RestSharp.dll

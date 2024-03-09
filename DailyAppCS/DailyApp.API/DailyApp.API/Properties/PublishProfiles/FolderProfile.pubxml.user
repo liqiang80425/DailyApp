@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\ApiPub</_PublishTargetUrl>
+    <History>True|2024-03-09T09:38:31.4196153Z;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="ConnStr">
+      <Value>server=.%3buid=sa%3bpwd=123456%3bdatabase=DailyApp</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>
